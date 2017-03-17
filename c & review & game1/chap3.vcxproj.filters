@@ -36,6 +36,9 @@
     <ClCompile Include="enemies.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="KeyBoardUpdata.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlayerController.h">
@@ -57,6 +60,9 @@
       <Filter>ソース ファイル</Filter>
     </ClInclude>
     <ClInclude Include="enemies.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyBoardUpdata.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
   </ItemGroup>

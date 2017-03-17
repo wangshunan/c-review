@@ -37,7 +37,6 @@ void FireUpdata() {
 	_firetimer++;
 	_firetimer %= FIRE_STOP;
 	if ( _firetimer == 0 ) {
-
 		if ( reversion == FALSE ) {
 			_firedata[_firecounter].activation = TRUE;
 			_firecounter++;
@@ -46,7 +45,6 @@ void FireUpdata() {
 			_firedata[_firecounter].activation = FALSE;
 			_firecounter--;
 		}
-
 		if ( _firecounter > FIRE_MAX ) {
 			reversion = TRUE;
 			_firecounter = FIRE_MAX;

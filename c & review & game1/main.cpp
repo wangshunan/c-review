@@ -5,6 +5,7 @@
 #include"Loding.h"
 #include"Init.h"
 #include"enemies.h"
+#include"KeyBoardUpdata.h"
 
 int _lasttime = 0;
 float _frametime = 0;
@@ -47,6 +48,9 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 		_lasttime = curtime;
 
 		ClearDrawScreen();
+
+		// keybord“ü—Íupdata
+		KeyboardUpdate();
 
 		switch (_gamestate) {
 		case GAME_TITLE:

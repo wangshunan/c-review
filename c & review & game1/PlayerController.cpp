@@ -5,6 +5,7 @@
 #include"MapData.h"
 #include"Init.h"
 #include"enemies.h"
+#include"KeyBoardUpdata.h"
 
 BOOL _akey_prev;
 PlayerStatus _playerstatus;
@@ -14,33 +15,36 @@ void PlayerUpdata() {
 	_playerstatus.movecounter++;
 	_playerstatus.movecounter %= MOVERATE;
 
-	//player移動
-	int key = GetJoypadInputState( DX_INPUT_KEY_PAD1 );
-	if ( _playerstatus.movecounter == 0 ) {
-		int hx = _playerstatus.posx;
-		int hy = _playerstatus.posy;
-		float mv = 1.0f;
+	int hx = _playerstatus.posx;
+	int hy = _playerstatus.posy;
+	float mv = 1.0f;
 
-		if ( key & PAD_INPUT_UP )  hy -= mv;
-		if ( key & PAD_INPUT_DOWN ) hy += mv;
-		if ( key & PAD_INPUT_LEFT ) hx -= mv;
-		if ( key & PAD_INPUT_RIGHT ) hx += mv;
+	if ( _push[ KEY_INPUT_UP ] == 1 ) {
+		hy -= mv;
+	} else 
+	if ( _push[ KEY_INPUT_DOWN ] == 1 ) {
+		hy += mv;
+	} else
+	if ( _push[ KEY_INPUT_LEFT ] == 1 ){
+		hx -= mv;
+	} else
+	if ( _push[ KEY_INPUT_RIGHT ] == 1 ) {
+		hx += mv;
+	}
+	if ( _mapdata[hy][hx] == MPITEM_KEY ) {
+		_mapdata[hy][hx] = MPITEM_BACK;
+		_playerstatus.key = TRUE;
+	}
 
-		if ( _mapdata[hy][hx] == MPITEM_KEY ) {
-			_mapdata[hy][hx] = MPITEM_BACK;
-			_playerstatus.key = TRUE;
-		}
+	if ( _mapdata[hy][hx] == MPITEM_GOAL && _playerstatus.key == TRUE ) {
+		_mapdata[hy][hx] = MPITEM_BACK;
+		_gamestate = GAME_CLEAR;
+		_timerstart = _lasttime;
+	}
 
-		if ( _mapdata[hy][hx] == MPITEM_GOAL && _playerstatus.key == TRUE ) {
-			_mapdata[hy][hx] = MPITEM_BACK;
-			_gamestate = GAME_CLEAR;
-			_timerstart = _lasttime;
-		}
-
-		if ( _mapdata[hy][hx] == MPITEM_BACK ) {
-			_playerstatus.posx = hx;
-			_playerstatus.posy = hy;
-		}
+	if ( _mapdata[hy][hx] == MPITEM_BACK ) {
+		_playerstatus.posx = hx;
+		_playerstatus.posy = hy;
 	}
 }
 
@@ -64,23 +68,9 @@ void CollisionDetection() {
 }
 
 void TitleController() {
-	int key = GetJoypadInputState( DX_INPUT_KEY_PAD1 );
 	//Zキーチェックして画面を切り替え
-	if ( IsKeyTrigger( key ) == TRUE ) {
+	if ( _push[ KEY_INPUT_Z ] == 1 ) {
 		_gamestate  = GAME_MAIN;
 		InitStage();
 	}
-}
-
-
-BOOL IsKeyTrigger( int key ) {
-	if ( key & PAD_INPUT_A ) {
-		if ( _akey_prev == FALSE ) {
-			_akey_prev = TRUE;
-			return TRUE;
-		}
-	} else {
-		_akey_prev = FALSE;
-	}
-	return FALSE;
 }

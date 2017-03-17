@@ -89,6 +89,7 @@
     <ClCompile Include="DrawGraph.cpp" />
     <ClCompile Include="enemies.cpp" />
     <ClCompile Include="Init.cpp" />
+    <ClCompile Include="KeyBoardUpdata.cpp" />
     <ClCompile Include="Loding.cpp" />
     <ClCompile Include="MapData.cpp" />
     <ClCompile Include="PlayerController.cpp" />
@@ -98,6 +99,7 @@
     <ClInclude Include="DrawGraph.h" />
     <ClInclude Include="enemies.h" />
     <ClInclude Include="Init.h" />
+    <ClInclude Include="KeyBoardUpdata.h" />
     <ClInclude Include="Loding.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="MapData.h" />
