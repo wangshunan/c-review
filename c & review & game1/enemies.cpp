@@ -10,9 +10,7 @@ int _firecounter = 0;
 BOOL reversion = FALSE;
 
 void EnemyUpData() {
-
 	for( int i = 0; i < ENEMY_MAX; i++ ) {
-
 		if ( _enemystatus[i].type == MT_DRAGON ) {
 			continue;
 		}

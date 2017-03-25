@@ -6,6 +6,7 @@
 #include"Init.h"
 #include"enemies.h"
 #include"KeyBoardUpdata.h"
+#include <math.h>
 
 int _lasttime = 0;
 float _frametime = 0;
@@ -18,7 +19,7 @@ void DrawGameTitle();
 void DrawGameMain();
 void DrawGameClear();
 void GameOverUpdata();
-
+void DrawPixelTest();
 
 int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow )
 {
@@ -30,16 +31,17 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 		return -1 ;			// エラーが起きたら直ちに終了
 	}
 
+	// 画像ロード
 	LoadGameImage();
 	if ( LoadGameImageCheck() == FALSE ) {
 		return -1;
 	}
 
+
 	// stage初期化
 	InitStage();
 
 	SetDrawScreen(DX_SCREEN_BACK);
-	_lasttime = GetNowCount();
 
 	while ( ProcessMessage() == 0 && CheckHitKey( KEY_INPUT_ESCAPE ) == 0 ) {
 		//1ループ時間計測
@@ -90,6 +92,7 @@ void DrawGameMain() {
 	FireUpdata();
 	CollisionDetection();
 	DrawMainGame();
+	DrawPixelTest();
 }
 
 void DrawGameClear() {
@@ -100,4 +103,15 @@ void DrawGameClear() {
 void GameOverUpdata() {
 	DrawGameOverUpdata();
 	if ( _lasttime - _timerstart > 5000 ) _gamestate = GAME_TITLE;
+}
+
+void DrawPixelTest() {
+	for ( int y = 0; y <= 600; y++ ) {
+		for ( int x = 0; x <= 800; x++ ) {
+			int i = sqrt( ( ( x - _playerstatus.posx * 50 - 25 ) * ( x - _playerstatus.posx * 50 - 25 ) ) +(  y - _playerstatus.posy * 50 - 25 ) * ( ( y - _playerstatus.posy * 50 - 25 ) ) );
+			if ( i > 120 ) {
+				DrawPixel( x , y , GetColor( 0, 0, 0 ) );
+			}
+		}
+	}
 }

@@ -4,7 +4,7 @@
 
 #include<DxLib.h>
 
-CONST int MOVERATE = 15;
+CONST int MOVERATE = 25;
 
 struct PlayerStatus {
 	int posx;
@@ -16,7 +16,6 @@ struct PlayerStatus {
 extern BOOL _akey_prev;
 extern PlayerStatus _playerstatus;
 
-BOOL IsKeyTrigger( int key );
 void PlayerUpdata();
 void TitleController();
 void CollisionDetection();
