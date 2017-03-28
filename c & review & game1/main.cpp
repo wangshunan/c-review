@@ -8,18 +8,17 @@
 #include"KeyBoardUpdata.h"
 #include <math.h>
 
+// 1ループ時間計測
 int _lasttime = 0;
 float _frametime = 0;
 int _timerstart;
 
-
 GameState _gamestate = GAME_TITLE;
 
-void DrawGameTitle();
-void DrawGameMain();
-void DrawGameClear();
+void GameTitleUpdata();
+void MainGameUpdata();
+void GameClearUpdata();
 void GameOverUpdata();
-void DrawPixelTest();
 
 int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow )
 {
@@ -37,12 +36,6 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 		return -1;
 	}
 
-
-	// stage初期化
-	InitStage();
-
-	SetDrawScreen(DX_SCREEN_BACK);
-
 	while ( ProcessMessage() == 0 && CheckHitKey( KEY_INPUT_ESCAPE ) == 0 ) {
 		//1ループ時間計測
 		int curtime = GetNowCount();
@@ -54,15 +47,16 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 		// keybord入力updata
 		KeyboardUpdate();
 
+		//GameUpdata
 		switch (_gamestate) {
 		case GAME_TITLE:
-			DrawGameTitle();
+			GameTitleUpdata();
 			break;
 		case GAME_MAIN:
-			DrawGameMain();
+			MainGameUpdata();
 			break;
 		case GAME_CLEAR:
-			DrawGameClear();
+			GameClearUpdata();
 			break;
 		case GAME_OVER:
 			GameOverUpdata();
@@ -74,28 +68,25 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 
 	}
 
-	//WaitKey() ;				// キー入力待ち
+	DxLib_End() ;	// ＤＸライブラリ使用の終了処理
 
-	DxLib_End() ;				// ＤＸライブラリ使用の終了処理
-
-	return 0 ;				// ソフトの終了 
+	return 0 ;		// ソフトの終了 
 }
 
-void DrawGameTitle() {
+void GameTitleUpdata() {
 	TitleController();
 	DrawTitleGraph();
 }
 
-void DrawGameMain() {
+void MainGameUpdata() {
 	PlayerUpdata();
 	EnemyUpData();
 	FireUpdata();
 	CollisionDetection();
 	DrawMainGame();
-	DrawPixelTest();
 }
 
-void DrawGameClear() {
+void GameClearUpdata() {
 	DrawGameClearUpdata();
 	if ( _lasttime - _timerstart > 5000 ) _gamestate = GAME_TITLE;
 }
@@ -103,15 +94,4 @@ void DrawGameClear() {
 void GameOverUpdata() {
 	DrawGameOverUpdata();
 	if ( _lasttime - _timerstart > 5000 ) _gamestate = GAME_TITLE;
-}
-
-void DrawPixelTest() {
-	for ( int y = 0; y <= 600; y++ ) {
-		for ( int x = 0; x <= 800; x++ ) {
-			int i = sqrt( ( ( x - _playerstatus.posx * 50 - 25 ) * ( x - _playerstatus.posx * 50 - 25 ) ) +(  y - _playerstatus.posy * 50 - 25 ) * ( ( y - _playerstatus.posy * 50 - 25 ) ) );
-			if ( i > 120 ) {
-				DrawPixel( x , y , GetColor( 0, 0, 0 ) );
-			}
-		}
-	}
 }

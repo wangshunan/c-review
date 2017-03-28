@@ -30,6 +30,7 @@ void InitEnemy() {
 		}
 	}
 }
+
 void InitFire( int idex ) {
 	for( int i = FIRE_MIN; i < FIRE_MAX; i++ ) {
 		_firedata[i].posx = _enemystatus[idex].posx - i - 1;

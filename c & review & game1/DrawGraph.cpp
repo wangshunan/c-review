@@ -1,4 +1,5 @@
 #include<DxLib.h>
+#include<math.h>
 #include"PlayerController.h"
 #include"DrawGraph.h"
 #include"Loding.h"
@@ -10,6 +11,7 @@ void DrawMainGame() {
 	DrawPlayerGraph();
 	DrawEnemyGraph();
 	DrawDragonFire();
+	DrawBackFog();
 }
 
 void DrawMap() {
@@ -60,5 +62,16 @@ void DrawGameOverUpdata() {
 void DrawGameClearUpdata() {
 	DrawBox( 0, 0, 800, 600, GetColor( 255, 255, 255 ), TRUE );
 	DrawStringToHandle( 100, 200, "ÉQÅ[ÉÄÉNÉäÉA", GetColor( 80, 128, 255 ), _largefont );
+}
+
+void DrawBackFog() {
+	for ( int y = 0; y <= 600; y++ ) {
+		for ( int x = 0; x <= 800; x++ ) {
+			int radius = sqrt( ( ( x - _playerstatus.posx * 50 - 25 ) * ( x - _playerstatus.posx * 50 - 25 ) ) +(  y - _playerstatus.posy * 50 - 25 ) * ( ( y - _playerstatus.posy * 50 - 25 ) ) );
+			if ( radius > 120 ) {
+				DrawPixel( x , y , GetColor( 0, 0, 0 ) );
+			}
+		}
+	}
 }
 

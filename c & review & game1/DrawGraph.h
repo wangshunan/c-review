@@ -12,6 +12,6 @@ void DrawEnemyGraph();
 void DrawGameOverUpdata();
 void DrawGameClearUpdata();
 void DrawDragonFire();
-
+void DrawBackFog();
 
 #endif

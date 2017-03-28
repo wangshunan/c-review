@@ -71,6 +71,8 @@ void TitleController() {
 	//Zキーチェックして画面を切り替え
 	if ( _push[ KEY_INPUT_Z ] == 1 ) {
 		_gamestate  = GAME_MAIN;
+
+		// 初期化
 		InitStage();
 	}
 }
