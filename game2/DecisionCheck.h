@@ -12,12 +12,12 @@ public:
 
 	void GetDecisionData(DecisionCheckPtr &temp);
 protected:
-	BOOL CheckBlockSub(float x, float y);
+	BOOL CheckBlockSub(float x, float y, int sizex, int sizey);
 public:
 	struct  AtariInfo {
 		BOOL UL, UR, DL, DR, GL, GR;
 	};
-	AtariInfo CheckBlock(float x, float y);
+	AtariInfo CheckBlock(float x, float y, float rx, int sizex, int sizey);
 
 	static DecisionCheckPtr _decisioncheck;
 	MapDataPtr _mapdata;

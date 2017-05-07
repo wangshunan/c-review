@@ -11,7 +11,7 @@ Draw::Draw() {
 	_gamelogic -> GetGameState( _gamelogic );
 	_mapdata -> GetMapData( _mapdata );
 	_gametime -> GetGameTime( _gametime );
-	_playerdata->GetPlayerData(_playerdata);
+	_playerdata -> GetPlayerData(_playerdata);
 }
 
 Draw::~Draw() {
@@ -45,20 +45,27 @@ void Draw::DrawMap() {
 			}
 		}
 	}
-	//DrawGraph(0, 0, _imagedata->_imagehandles.block[0], TRUE);
 
 }
 
 void Draw::DrawPlayer() {
 
-	DrawRotaGraph2(( _playerdata->_posx * _imagedata->CHIP_SIZE) - _playerdata -> _scrollx ,
-				   _playerdata->_posy * _imagedata->CHIP_SIZE,
-				   0, 0, 1, 0, _playerdata->_animimg, 
-				   TRUE, _playerdata->_flipx);
-
+    int offsety = _imagedata->CHIP_SIZE - _playerdata->_imgsizey;
+	if (!_playerdata->_isgrounded) {
+		DrawRotaGraph2((_playerdata->_posx  * _imagedata->CHIP_SIZE) - _playerdata->_scrollx,
+			(_playerdata->_posy  * _imagedata->CHIP_SIZE) + offsety,
+			0, 0, 1, 0, _playerdata->_animimg,
+			FALSE, _playerdata->_flipx);
+	}
+	else {
+		DrawRotaGraph2((_playerdata->_posx  * _imagedata->CHIP_SIZE) - _playerdata->_scrollx,
+			((int)_playerdata->_posy  * _imagedata->CHIP_SIZE) + offsety,
+			0, 0, 1, 0, _playerdata->_animimg,
+			FALSE, _playerdata->_flipx);
+	}
 }
 
-void Draw::DrawCharacter() {
+void Draw::DrawCharacter() { 
 	DrawPlayer();
 }
 
@@ -69,7 +76,7 @@ void Draw::DrawUpdata() {
 	switch ( _gamelogic -> _gamestate ) {
 	case GAME_STATE::GameTitle:
 		DrawTitle();
-		_gamelogic->_gamestate = GAME_STATE::GamePlaying;
+		_gamelogic -> _gamestate = GAME_STATE::GamePlaying;
 		break;
 	case GAME_STATE::GamePlaying:
 		DrawMap();

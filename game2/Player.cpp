@@ -37,7 +37,7 @@ void PlayerUpData::GetPlayerData( PlayerUpDataPtr &temp ) {
 
 void PlayerUpData::Init() {
 	_posx = 0;
-	_posy = 8;
+	_posy = 5;
 	_hp = 3;
 	_animcounter = 0;
 	_fps = 30;
@@ -46,23 +46,21 @@ void PlayerUpData::Init() {
 
 void PlayerUpData::PlayerController() {
 
-	float hx = _posx;
-	float hy = _posy;
+	hx = _posx;
+	hy = _posy;
 
 	// playerコントロール
-	if ( _input->_getHoldKey(KEY_INPUT_RIGHT) == 1) {
+	if (_input->_getHoldKey(KEY_INPUT_RIGHT) == 1) {
 		_speedx = 0.1;
 		_flipx = FALSE;
-	} 
-	else if ( _input->_getHoldKey(KEY_INPUT_LEFT) == 1 ) {
+	}
+	else if (_input->_getHoldKey(KEY_INPUT_LEFT) == 1) {
 		_speedx = -0.1;
 		_flipx = TRUE;
 	}
 	else {
 		_speedx = 0;
 	}
-
-	hx += _speedx;
 
 	if (_isgrounded) {
 		if (CheckHitKey(KEY_INPUT_SPACE) == 1) {
@@ -71,37 +69,21 @@ void PlayerUpData::PlayerController() {
 		}
 	}
 
-	DecisionCheck::AtariInfo atari = _decisioncheck->CheckBlock(hx * 50, hy * 50);
-	if (_flipx == FALSE) {
-		if (atari.DR == TRUE || atari.UR == TRUE) {
-			hx = _posx;
-		}
+
+	if (!_isgrounded) {
+		_speedy += GRAVITY / _fps;
 	}
-	else {
-		if (atari.DL == TRUE || atari.UL == TRUE) {
-			hx = _posx;
-		}
-	}
+
+	hx += _speedx;
+	hy -= _speedy / _fps;
 	
 	// スクロール補正
 	if (hx * 50 - _scrollx > 450) {
-		_scrollx += (hx - _posx) * 50 ;
+		_scrollx += (hx - _posx) * 50;
 	}
 
 	if (hx * 50 < _scrollx) {
 		hx = _posx;
-	}
-
-	//移動更新
-	_speedy += GRAVITY / _fps;
-	_posx = hx;
- 	_posy -= _speedy / _fps;
-
-	//接地判定
-	if ( _posy >= 9.7 ) {
-		_speedy = 0;
-		_posy = 9.7;
-		_isgrounded = TRUE;
 	}
 
 }
@@ -132,6 +114,7 @@ void PlayerUpData::AnimationUpdata() {
 	}
 
 	 _animimg = _nowanim[_animcounter];
+	 GetGraphSize(_animimg, &_imgsizex, &_imgsizey);
 }
 
 
@@ -154,7 +137,38 @@ void PlayerUpData::AnimChange(int anim[], int size) {
 	}
 }
 
+void PlayerUpData::CollisionCheck() {
+	DecisionCheck::AtariInfo atari = _decisioncheck->CheckBlock(hx * _imgsizex, hy * _imgsizey, _posx * _imgsizex, _imgsizex, _imgsizey);
+	if (_flipx == FALSE) {
+		if (atari.DR == TRUE || atari.UR == TRUE) {
+			hx = _posx;
+		}
+	}
+	else {
+		if (atari.DL == TRUE || atari.UL == TRUE) {
+			hx = _posx;
+		}
+	}
+
+	if (atari.GL == TRUE || atari.GR == TRUE) {
+		_speedy = 0;
+		hy = (float)((int)((hy * _imgsizey)) / _imgsizey);
+		_isgrounded = TRUE;
+	}
+	else {
+		_isgrounded = FALSE;
+	}
+
+	if (CheckHitKey(KEY_INPUT_Z) == 1) {
+		int i = 0;
+	}
+
+	_posx = hx;
+	_posy = hy;
+}
+
 void PlayerUpData::UpData() {
 	PlayerController();
 	AnimationUpdata();
+	CollisionCheck();
 }

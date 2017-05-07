@@ -18,9 +18,13 @@ public:
 	const float GRAVITY = -9.8f;
 	float _posx;
 	float _posy;
+	float hx;
+	float hy;
 	float _speedx;
 	float _speedy;
 	float _scrollx;
+	int _imgsizex;
+	int _imgsizey;
 	int _fps;
 	int _hp;
 	int _animcounter;
@@ -39,6 +43,7 @@ public:
 	void Init();
 	void UpData();
 	void GetPlayerData( PlayerUpDataPtr &temp );
+	void CollisionCheck();
 private:
 	void AnimationUpdata();
 	void PlayerController();
