@@ -56,21 +56,21 @@ void LoadUnityChanImage() {
 	CharacterImageDataPtr _charimgdata;
 	_charimgdata->GetCharacterImageData(_charimgdata);
 
+	LoadDivGraph( "media\\UnityChan.png", 28, 7, 4, 64, 64, _charimgdata -> imgtemp );
+
 	// Run
-	_charimgdata->_playerimg.run[0] = LoadGraph("media\\unitychan\\run\\Unitychan_Run_1.png");
-	_charimgdata->_playerimg.run[1] = LoadGraph("media\\unitychan\\run\\Unitychan_Run_2.png");
-	_charimgdata->_playerimg.run[2] = LoadGraph("media\\unitychan\\run\\Unitychan_Run_3.png");
-	_charimgdata->_playerimg.run[3] = LoadGraph("media\\unitychan\\run\\Unitychan_Run_4.png");
-	_charimgdata->_playerimg.run[4] = LoadGraph("media\\unitychan\\run\\Unitychan_Run_5.png");
-	_charimgdata->_playerimg.run[5] = LoadGraph("media\\unitychan\\run\\Unitychan_Run_6.png");
-	_charimgdata->_playerimg.run[6] = LoadGraph("media\\unitychan\\run\\Unitychan_Run_7.png");
-	_charimgdata->_playerimg.run[7] = LoadGraph("media\\unitychan\\run\\Unitychan_Run_8.png");
+	_charimgdata->_playerimg.run[ 0 ] = _charimgdata->imgtemp[ 7 ];
+	_charimgdata->_playerimg.run[ 1 ] = _charimgdata->imgtemp[ 8 ];
+	_charimgdata->_playerimg.run[ 2 ] = _charimgdata->imgtemp[ 9 ];
+	_charimgdata->_playerimg.run[ 3 ] = _charimgdata->imgtemp[ 10 ];
+	_charimgdata->_playerimg.run[ 4 ] = _charimgdata->imgtemp[ 14 ];
+	_charimgdata->_playerimg.run[ 5 ] = _charimgdata->imgtemp[ 15 ];
+	_charimgdata->_playerimg.run[ 6 ] = _charimgdata->imgtemp[ 16 ];
+	_charimgdata->_playerimg.run[ 7 ] = _charimgdata->imgtemp[ 17 ];
 
 	// Wait
-	_charimgdata->_playerimg.wait[0] = LoadGraph("media\\unitychan\\wait\\Unitychan_Idle_1.png");
-	_charimgdata->_playerimg.wait[1] = LoadGraph("media\\unitychan\\wait\\Unitychan_Idle_2.png");
-	_charimgdata->_playerimg.wait[2] = LoadGraph("media\\unitychan\\wait\\Unitychan_Idle_3.png");
-	_charimgdata->_playerimg.wait[3] = LoadGraph("media\\unitychan\\wait\\Unitychan_Idle_4.png");
+	_charimgdata->_playerimg.wait[ 0 ] = _charimgdata->imgtemp[ 0 ];
+	_charimgdata->_playerimg.wait[ 1 ] = _charimgdata->imgtemp[ 1 ];
 
 	// jump_up
 	_charimgdata->_playerimg.jumpup[0] = LoadGraph("media\\unitychan\\jumpup\\Unitychan_Jump_Up_1.png");

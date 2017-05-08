@@ -62,7 +62,7 @@ void PlayerUpData::PlayerController() {
 		_speedx = 0;
 	}
 
-	if (_isgrounded) {
+	/*if (_isgrounded) {
 		if (CheckHitKey(KEY_INPUT_SPACE) == 1) {
 			_speedy = 7;
 			_isgrounded = FALSE;
@@ -72,7 +72,7 @@ void PlayerUpData::PlayerController() {
 
 	if (!_isgrounded) {
 		_speedy += GRAVITY / _fps;
-	}
+	}*/
 
 	hx += _speedx;
 	hy -= _speedy / _fps;
@@ -170,5 +170,5 @@ void PlayerUpData::CollisionCheck() {
 void PlayerUpData::UpData() {
 	PlayerController();
 	AnimationUpdata();
-	CollisionCheck();
+	//CollisionCheck();
 }

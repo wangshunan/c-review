@@ -37,7 +37,7 @@ public:
 	void SetCharacterImageData( const CharacterImageDataPtr &temp );
 private:
 	struct PlayerImageHandles {
-		int wait[4];
+		int wait[2];
 		int run[8];
 		int jumpup[2];
 		int jumpdown[2];
@@ -47,6 +47,7 @@ private:
 
 	static CharacterImageDataPtr _charimg;
 public:
+	int imgtemp[ 28 ];
 	PlayerImageHandles _playerimg;
 	std::vector<int> _nowanim;
 };

@@ -51,6 +51,7 @@ void Draw::DrawMap() {
 void Draw::DrawPlayer() {
 
     int offsety = _imagedata->CHIP_SIZE - _playerdata->_imgsizey;
+
 	if (!_playerdata->_isgrounded) {
 		DrawRotaGraph2((_playerdata->_posx  * _imagedata->CHIP_SIZE) - _playerdata->_scrollx,
 			(_playerdata->_posy  * _imagedata->CHIP_SIZE) + offsety,
