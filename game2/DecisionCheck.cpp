@@ -19,12 +19,19 @@ void DecisionCheck::GetDecisionData(DecisionCheckPtr &temp) {
 
 DecisionCheck::AtariInfo DecisionCheck::CheckBlock(float x, float y, float rx, int sizex, int sizey){
 	AtariInfo result;
-	result.UL = CheckBlockSub(x, y, sizex, sizey);
-	result.UR = CheckBlockSub(x + sizex - 1, y, sizex, sizey);
-	result.DL = CheckBlockSub(x, y + sizey - 1 , sizex, sizey);
-	result.DR = CheckBlockSub(x + sizex - 1, y + sizey - 1, sizex, sizey);
-	result.GL = CheckBlockSub(rx , y + sizey , sizex, sizey);
-	result.GR = CheckBlockSub(rx + sizex - 1, y + sizey, sizex, sizey);
+	float x_l, x_r, y_u, y_d, rx_l, rx_r;
+	x_l = x + 24;
+	x_r = x + sizex - 24;
+	y_u = y + 16;
+	y_d = y + sizey - 10;
+	rx_l = rx + 24;
+	rx_r = rx + sizex - 24;
+	result.UL = CheckBlockSub(x_l, y_u, sizex, sizey);
+	result.UR = CheckBlockSub(x_r - 1, y_u, sizex, sizey);
+	result.DL = CheckBlockSub(x_l, y_d - 1 , sizex, sizey);
+	result.DR = CheckBlockSub(x_r - 1, y_d - 1, sizex, sizey);
+	result.GL = CheckBlockSub(rx_l , y_d, sizex, sizey);
+	result.GR = CheckBlockSub(rx_l - 1, y_d, sizex, sizey);
 
 	return result;
 }

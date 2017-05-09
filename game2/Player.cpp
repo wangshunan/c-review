@@ -37,7 +37,7 @@ void PlayerUpData::GetPlayerData( PlayerUpDataPtr &temp ) {
 
 void PlayerUpData::Init() {
 	_posx = 0;
-	_posy = 5;
+	_posy = 10;
 	_hp = 3;
 	_animcounter = 0;
 	_fps = 30;
@@ -62,7 +62,7 @@ void PlayerUpData::PlayerController() {
 		_speedx = 0;
 	}
 
-	/*if (_isgrounded) {
+	if (_isgrounded) {
 		if (CheckHitKey(KEY_INPUT_SPACE) == 1) {
 			_speedy = 7;
 			_isgrounded = FALSE;
@@ -72,7 +72,7 @@ void PlayerUpData::PlayerController() {
 
 	if (!_isgrounded) {
 		_speedy += GRAVITY / _fps;
-	}*/
+	}
 
 	hx += _speedx;
 	hy -= _speedy / _fps;
@@ -98,12 +98,12 @@ void PlayerUpData::AnimationUpdata() {
 		AnimChange(_animimgdata->_playerimg.wait, std::size(_animimgdata->_playerimg.wait));
 	}
 
-	if (_speedy > 0) {
-		AnimChange(_animimgdata->_playerimg.jumpup, std::size(_animimgdata->_playerimg.jumpup));
+	/*if (_speedy != 0) {
+		AnimChange(_animimgdata->_playerimg.wait, std::size(_animimgdata->_playerimg.wait));
 	}
 	else if (_speedy < 0) {
 		AnimChange(_animimgdata->_playerimg.jumpdown, std::size(_animimgdata->_playerimg.jumpdown));
-	}
+	}*/
 
 	if ( _gametime->_nowtime % 6 == 0 ) {
 		_animcounter++;
@@ -152,7 +152,7 @@ void PlayerUpData::CollisionCheck() {
 
 	if (atari.GL == TRUE || atari.GR == TRUE) {
 		_speedy = 0;
-		hy = (float)((int)((hy * _imgsizey)) / _imgsizey);
+		hy = _posy; // (float)((int)(hy * _imgsizey) / _imgsizey);
 		_isgrounded = TRUE;
 	}
 	else {
@@ -170,5 +170,5 @@ void PlayerUpData::CollisionCheck() {
 void PlayerUpData::UpData() {
 	PlayerController();
 	AnimationUpdata();
-	//CollisionCheck();
+	CollisionCheck();
 }

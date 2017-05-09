@@ -50,19 +50,19 @@ void Draw::DrawMap() {
 
 void Draw::DrawPlayer() {
 
-    int offsety = _imagedata->CHIP_SIZE - _playerdata->_imgsizey;
-
+	int setoff = 8;
+	if ()
 	if (!_playerdata->_isgrounded) {
-		DrawRotaGraph2((_playerdata->_posx  * _imagedata->CHIP_SIZE) - _playerdata->_scrollx,
-			(_playerdata->_posy  * _imagedata->CHIP_SIZE) + offsety,
+		DrawRotaGraph2((_playerdata->_posx * 50) - 8 - _playerdata->_scrollx,
+			(_playerdata->_posy * 50) - 6,
 			0, 0, 1, 0, _playerdata->_animimg,
-			FALSE, _playerdata->_flipx);
+			TRUE, _playerdata->_flipx);
 	}
 	else {
-		DrawRotaGraph2((_playerdata->_posx  * _imagedata->CHIP_SIZE) - _playerdata->_scrollx,
-			((int)_playerdata->_posy  * _imagedata->CHIP_SIZE) + offsety,
+		DrawRotaGraph2((_playerdata->_posx * 50) - 8 - _playerdata->_scrollx,
+			(int)(_playerdata->_posy * 50) - 6,
 			0, 0, 1, 0, _playerdata->_animimg,
-			FALSE, _playerdata->_flipx);
+			TRUE, _playerdata->_flipx);
 	}
 }
 
