@@ -50,20 +50,10 @@ void Draw::DrawMap() {
 
 void Draw::DrawPlayer() {
 
-	int setoff = 8;
-	if ()
-	if (!_playerdata->_isgrounded) {
-		DrawRotaGraph2((_playerdata->_posx * 50) - 8 - _playerdata->_scrollx,
-			(_playerdata->_posy * 50) - 6,
-			0, 0, 1, 0, _playerdata->_animimg,
-			TRUE, _playerdata->_flipx);
-	}
-	else {
-		DrawRotaGraph2((_playerdata->_posx * 50) - 8 - _playerdata->_scrollx,
-			(int)(_playerdata->_posy * 50) - 6,
-			0, 0, 1, 0, _playerdata->_animimg,
-			TRUE, _playerdata->_flipx);
-	}
+	DrawRotaGraph2(( _playerdata->_posx * _playerdata -> _imgsizex ) - _playerdata->_scrollx,
+		( _playerdata->_posy * _playerdata -> _imgsizey ),
+		0, 0, 1, 0, _playerdata->_animimg,
+		TRUE, _playerdata->_flipx);
 }
 
 void Draw::DrawCharacter() { 

@@ -19,6 +19,7 @@ PlayerUpData::PlayerUpData() {
 	_gametime -> GetGameTime( _gametime );
 	_animimgdata -> GetCharacterImageData( _animimgdata );
 	_input->GetInput( _input );
+	_mapdata->GetMapData(_mapdata);
 	_decisioncheck->GetDecisionData(_decisioncheck);
 
 	Init();
@@ -36,8 +37,8 @@ void PlayerUpData::GetPlayerData( PlayerUpDataPtr &temp ) {
 }
 
 void PlayerUpData::Init() {
-	_posx = 0;
-	_posy = 10;
+	_posx = -0.33;
+	_posy = 1;
 	_hp = 3;
 	_animcounter = 0;
 	_fps = 30;
@@ -75,14 +76,14 @@ void PlayerUpData::PlayerController() {
 	}
 
 	hx += _speedx;
-	hy -= _speedy / _fps;
+    hy -= _speedy / _fps;
 	
 	// ƒXƒNƒ[ƒ‹•â³
-	if (hx * 50 - _scrollx > 450) {
-		_scrollx += (hx - _posx) * 50;
+	if (hx * _imgsizey - _scrollx > 450) {
+		_scrollx += (hx - _posx) * _imgsizey;
 	}
 
-	if (hx * 50 < _scrollx) {
+	if ((hx * _imgsizey) + OFFSET_WIDTH < _scrollx) {
 		hx = _posx;
 	}
 
@@ -152,15 +153,11 @@ void PlayerUpData::CollisionCheck() {
 
 	if (atari.GL == TRUE || atari.GR == TRUE) {
 		_speedy = 0;
-		hy = _posy; // (float)((int)(hy * _imgsizey) / _imgsizey);
+		hy = (float)((int)( ( hy * _imgsizey + _imgsizey ) / _mapdata -> CHIP_SIZE ) * _mapdata->CHIP_SIZE - _imgsizey + OFFSET_HIGHT_DOWN) / _imgsizey;
 		_isgrounded = TRUE;
 	}
 	else {
 		_isgrounded = FALSE;
-	}
-
-	if (CheckHitKey(KEY_INPUT_Z) == 1) {
-		int i = 0;
 	}
 
 	_posx = hx;

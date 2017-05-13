@@ -12,7 +12,7 @@ public:
 
 	void GetDecisionData(DecisionCheckPtr &temp);
 protected:
-	BOOL CheckBlockSub(float x, float y, int sizex, int sizey);
+	BOOL CheckBlockSub(float x, float y);
 public:
 	struct  AtariInfo {
 		BOOL UL, UR, DL, DR, GL, GR;

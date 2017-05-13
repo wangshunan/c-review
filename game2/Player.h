@@ -16,6 +16,9 @@ public:
 	std::vector<int> _nowanim;
 
 	const float GRAVITY = -9.8f;
+	const int OFFSET_HIGHT_UP = 16;
+	const int OFFSET_HIGHT_DOWN = 8;
+	const int OFFSET_WIDTH = 24;
 	float _posx;
 	float _posy;
 	float hx;
@@ -53,5 +56,6 @@ private:
 	GameTimePtr _gametime;
 	CharacterImageDataPtr _animimgdata;
 	InputPtr _input;
+	MapDataPtr _mapdata;
 	DecisionCheckPtr _decisioncheck;
 };
