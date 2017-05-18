@@ -61,7 +61,7 @@ public:
 	void GetMapData( MapDataPtr &temp );
 	void SetMapData( const MapDataPtr &temp );
 	void InitStage();
-	CONST static int MAP_HEIGHT = 12;
+	CONST static int MAP_HEIGHT = 16;
 	CONST static int MAP_WIDTH = 500;
 private:
 	char buf[256];

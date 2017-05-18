@@ -49,7 +49,6 @@ void PlayerUpData::PlayerController() {
 
 	hx = _posx;
 	hy = _posy;
-
 	// playerƒRƒ“ƒgƒ[ƒ‹
 	if (_input->_getHoldKey(KEY_INPUT_RIGHT) == 1) {
 		_speedx = 0.1;
@@ -63,6 +62,7 @@ void PlayerUpData::PlayerController() {
 		_speedx = 0;
 	}
 
+
 	if (_isgrounded) {
 		if (CheckHitKey(KEY_INPUT_SPACE) == 1) {
 			_speedy = 7;
@@ -74,6 +74,8 @@ void PlayerUpData::PlayerController() {
 	if (!_isgrounded) {
 		_speedy += GRAVITY / _fps;
 	}
+
+
 
 	hx += _speedx;
     hy -= _speedy / _fps;
@@ -98,15 +100,16 @@ void PlayerUpData::AnimationUpdata() {
 	else {
 		AnimChange(_animimgdata->_playerimg.wait, std::size(_animimgdata->_playerimg.wait));
 	}
-
-	/*if (_speedy != 0) {
-		AnimChange(_animimgdata->_playerimg.wait, std::size(_animimgdata->_playerimg.wait));
+	if (!_decisioncheck->_iscollision) {
+		if (_speedy > 0) {
+			AnimChange(_animimgdata->_playerimg.jumpup, std::size(_animimgdata->_playerimg.jumpup));
+		}
+		else if (_speedy < 0) {
+			AnimChange(_animimgdata->_playerimg.jumpdown, std::size(_animimgdata->_playerimg.jumpdown));
+		}
 	}
-	else if (_speedy < 0) {
-		AnimChange(_animimgdata->_playerimg.jumpdown, std::size(_animimgdata->_playerimg.jumpdown));
-	}*/
 
-	if ( _gametime->_nowtime % 6 == 0 ) {
+	if ( _gametime->_nowtime % 10 == 0 ) {
 		_animcounter++;
 	}
 
@@ -139,21 +142,27 @@ void PlayerUpData::AnimChange(int anim[], int size) {
 }
 
 void PlayerUpData::CollisionCheck() {
-	DecisionCheck::AtariInfo atari = _decisioncheck->CheckBlock(hx * _imgsizex, hy * _imgsizey, _posx * _imgsizex, _imgsizex, _imgsizey);
-	if (_flipx == FALSE) {
-		if (atari.DR == TRUE || atari.UR == TRUE) {
-			hx = _posx;
+	DecisionCheck::AtariInfo atari = _decisioncheck->CheckBlock(hx * _imgsizex, hy * _imgsizey, _posx * _imgsizex, _posy * _imgsizey, _imgsizex, _imgsizey);
+	if (!_decisioncheck->_iscollision) {
+		if (_flipx == FALSE) {
+			if (atari.DR == TRUE || atari.UR == TRUE) {
+				hx = _posx;
+			}
+		}
+		else {
+			if (atari.DL == TRUE || atari.UL == TRUE) {
+				hx = _posx;
+			}
 		}
 	}
-	else {
-		if (atari.DL == TRUE || atari.UL == TRUE) {
-			hx = _posx;
-		}
+	else if ( _decisioncheck->_iscollision ){
+		_speedy = 0;
+		hy = _posy;
 	}
 
 	if (atari.GL == TRUE || atari.GR == TRUE) {
 		_speedy = 0;
-		hy = (float)((int)( ( hy * _imgsizey + _imgsizey ) / _mapdata -> CHIP_SIZE ) * _mapdata->CHIP_SIZE - _imgsizey + OFFSET_HIGHT_DOWN) / _imgsizey;
+		hy = (float)((int)( ( hy * _imgsizey + _imgsizey ) / _mapdata->CHIP_SIZE ) * _mapdata->CHIP_SIZE - _imgsizey + OFFSET_HIGHT_DOWN) / _imgsizey;
 		_isgrounded = TRUE;
 	}
 	else {

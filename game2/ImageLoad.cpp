@@ -73,12 +73,12 @@ void LoadUnityChanImage() {
 	_charimgdata->_playerimg.wait[ 1 ] = _charimgdata->imgtemp[ 1 ];
 
 	// jump_up
-	_charimgdata->_playerimg.jumpup[0] = LoadGraph("media\\unitychan\\jumpup\\Unitychan_Jump_Up_1.png");
-	_charimgdata->_playerimg.jumpup[1] = LoadGraph("media\\unitychan\\jumpup\\Unitychan_Jump_Up_2.png");
+	_charimgdata->_playerimg.jumpup[0] = _charimgdata->imgtemp[ 21 ];
+	_charimgdata->_playerimg.jumpup[1] = _charimgdata->imgtemp[ 22 ];
 
 	// jump_down
-	_charimgdata->_playerimg.jumpdown[0] = LoadGraph("media\\unitychan\\fall\\Unitychan_Jump_Fall_1.png");
-	_charimgdata->_playerimg.jumpdown[1] = LoadGraph("media\\unitychan\\fall\\Unitychan_Jump_Fall_2.png");
+	_charimgdata->_playerimg.jumpdown[0] = _charimgdata->imgtemp[ 26 ];
+	_charimgdata->_playerimg.jumpdown[1] = _charimgdata->imgtemp[ 27 ];
 
 
 	_charimgdata->SetCharacterImageData(_charimgdata);

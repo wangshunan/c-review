@@ -17,7 +17,8 @@ public:
 	struct  AtariInfo {
 		BOOL UL, UR, DL, DR, GL, GR;
 	};
-	AtariInfo CheckBlock(float x, float y, float rx, int sizex, int sizey);
+	AtariInfo CheckBlock(float x, float y, float rx, float ry, int sizex, int sizey);
+	bool _iscollision;
 
 	static DecisionCheckPtr _decisioncheck;
 	MapDataPtr _mapdata;
