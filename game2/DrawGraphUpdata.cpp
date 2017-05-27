@@ -4,6 +4,7 @@
 #include"GameLogic.h"
 #include"GameTime.h"
 #include"Player.h"
+#include"Score.h"
 
 Draw::Draw() {
 	_chardata -> GetCharacterImageData( _chardata );
@@ -12,6 +13,7 @@ Draw::Draw() {
 	_mapdata -> GetMapData( _mapdata );
 	_gametime -> GetGameTime( _gametime );
 	_playerdata -> GetPlayerData(_playerdata);
+	_score->GetScoreData(_score);
 }
 
 Draw::~Draw() {
@@ -28,9 +30,9 @@ void Draw::DrawScreenFlip() {
 
 void Draw::DrawTitle() {
 	DrawGraph( 0, 0, _imagedata -> _imagehandles.title, TRUE );
-	DrawStringToHandle(30, 450, "Z -> START", GetColor(255,0,255), _imagedata ->_middlefont);
-	DrawStringToHandle(30, 490, "カーソルキーで移動", GetColor(255, 0, 255), _imagedata->_middlefont);
-	DrawStringToHandle(30, 540, "Z -> JUMP X -> Ataack", GetColor(0, 0, 0), _imagedata->_middlefont);
+	DrawStringToHandle(30, 550, "Z -> START", GetColor(255,0,255), _imagedata ->_middlefont);
+	DrawStringToHandle(30, 620, "カーソルキーで移動", GetColor(255, 0, 255), _imagedata->_middlefont);
+	DrawStringToHandle(30, 680, "Space -> JUMP", GetColor(0, 0, 0), _imagedata->_middlefont);
 }
 
 void Draw::DrawMap() {
@@ -43,8 +45,13 @@ void Draw::DrawMap() {
 			if (_mapdata -> _data[y][x + sc] == '1' ) {
 				DrawGraph(x * _imagedata -> CHIP_SIZE - shiftx, y * _imagedata -> CHIP_SIZE, _imagedata->_imagehandles.block, TRUE);
 			}
+			if (_mapdata->_data[y][x + sc] == '2') {
+				DrawGraph(x * _imagedata->CHIP_SIZE - shiftx, y * _imagedata->CHIP_SIZE, _imagedata->_imagehandles.coin[0], TRUE);
+			}
 		}
 	}
+
+	DrawFormatString(0, 0, GetColor(255, 255, 255), "SCORE : %d", _score->_score);
 
 }
 
@@ -67,7 +74,6 @@ void Draw::DrawUpdata() {
 	switch ( _gamelogic -> _gamestate ) {
 	case GAME_STATE::GameTitle:
 		DrawTitle();
-		_gamelogic -> _gamestate = GAME_STATE::GamePlaying;
 		break;
 	case GAME_STATE::GamePlaying:
 		DrawMap();

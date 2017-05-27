@@ -9,6 +9,7 @@ Game::Game():
 	_gameupdata(GameUpdataPtr(new GameUpdata))
 {
 	_mapdata->GetMapData(_mapdata);
+	_playerdata->GetPlayerData(_playerdata);
 }
 
 
@@ -26,6 +27,7 @@ GamePtr Game::GetInstance() {
 void Game::Init() {
 	LoadGameImage();
 	_mapdata -> InitStage();
+	_playerdata -> Init();
 }
 
 void Game::Updata() {

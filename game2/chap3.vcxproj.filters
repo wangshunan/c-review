@@ -5,77 +5,111 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="ヘッダー ファイル">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    <Filter Include="ソース ファイル\Chractar">
+      <UniqueIdentifier>{031adc6e-7835-4c17-9c22-f1d07c57a37f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="リソース ファイル">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="ソース ファイル\DrawGrap">
+      <UniqueIdentifier>{b3f9a199-5336-4219-8d2e-a6ada3b3bfb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Collision">
+      <UniqueIdentifier>{b8fe340c-6172-4c65-b041-2e48c72ce2e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\GameSystem">
+      <UniqueIdentifier>{4f4aa343-dd01-4710-8b0e-bdf25897e98d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Event">
+      <UniqueIdentifier>{4801f593-29d6-437d-b0b0-d18ca9679330}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Comon">
+      <UniqueIdentifier>{822aa697-37bc-4590-8f49-54706d8dd113}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="ImageLoad.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="GameTime.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="GameLogic.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="InputUpdata.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="GameUpdata.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="Player.cpp">
+      <Filter>ソース ファイル\Chractar</Filter>
     </ClCompile>
     <ClCompile Include="DrawGraphUpdata.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\DrawGrap</Filter>
     </ClCompile>
     <ClCompile Include="DecisionCheck.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>ソース ファイル\GameSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLogic.cpp">
+      <Filter>ソース ファイル\GameSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="GameTime.cpp">
+      <Filter>ソース ファイル\GameSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="GameUpdata.cpp">
+      <Filter>ソース ファイル\GameSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageLoad.cpp">
+      <Filter>ソース ファイル\DrawGrap</Filter>
+    </ClCompile>
+    <ClCompile Include="Score.cpp">
+      <Filter>ソース ファイル\Chractar</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleEvent.cpp">
+      <Filter>ソース ファイル\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="InputUpdata.cpp">
+      <Filter>ソース ファイル\GameSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuController.cpp">
+      <Filter>ソース ファイル\GameSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOverEvent.cpp">
+      <Filter>ソース ファイル\Event</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ImageLoad.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="smart_ptr.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="GameTime.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="GameLogic.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="InputUpdata.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="GameUpdata.h">
-      <Filter>ソース ファイル</Filter>
+    <ClInclude Include="Player.h">
+      <Filter>ソース ファイル\Chractar</Filter>
     </ClInclude>
     <ClInclude Include="DrawGraphUpdata.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\DrawGrap</Filter>
     </ClInclude>
     <ClInclude Include="DecisionCheck.h">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>ソース ファイル\GameSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLogic.h">
+      <Filter>ソース ファイル\GameSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="GameTime.h">
+      <Filter>ソース ファイル\GameSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="GameUpdata.h">
+      <Filter>ソース ファイル\GameSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageLoad.h">
+      <Filter>ソース ファイル\DrawGrap</Filter>
+    </ClInclude>
+    <ClInclude Include="Score.h">
+      <Filter>ソース ファイル\Chractar</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleEvent.h">
+      <Filter>ソース ファイル\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="InputUpdata.h">
+      <Filter>ソース ファイル\GameSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="smart_ptr.h">
+      <Filter>ソース ファイル\Comon</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuController.h">
+      <Filter>ソース ファイル\GameSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOverEvent.h">
+      <Filter>ソース ファイル\Event</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

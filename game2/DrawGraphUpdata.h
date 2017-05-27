@@ -3,6 +3,7 @@
 #include"GameLogic.h"
 #include"GameTime.h"
 #include"Player.h"
+#include"Score.h"
 
 PTR( Draw );
 
@@ -29,4 +30,5 @@ private:
 	GameTimePtr _gametime;
 	CharacterImageDataPtr _chardata;
 	PlayerUpDataPtr _playerdata;
+	ScorePtr _score;
 };

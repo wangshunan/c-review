@@ -4,13 +4,15 @@
 #include"GameTime.h"
 #include"ImageLoad.h"
 #include"DecisionCheck.h"
+#include"Score.h"
+#include"GameLogic.h"
 
 PTR( PlayerUpData );
 
 class PlayerData{
 public:
 	PlayerData();
-	virtual ~PlayerData();
+	~PlayerData();
 
 	int _animimg;
 	std::vector<int> _nowanim;
@@ -28,7 +30,7 @@ public:
 	float _scrollx;
 	int _imgsizex;
 	int _imgsizey;
-	int _fps;
+	int _frame;
 	int _hp;
 	int _animcounter;
 	int _nowanimsize;
@@ -58,4 +60,6 @@ private:
 	InputPtr _input;
 	MapDataPtr _mapdata;
 	DecisionCheckPtr _decisioncheck;
+	ScorePtr _score;
+	GameLogicPtr _gamelogic;
 };

@@ -16,7 +16,7 @@ public:
 protected:
 	struct ImageHandles{
 		int block;
-		int knife;
+		int coin[3];
 		int bullet;
 		int title;
 	};
@@ -47,7 +47,6 @@ private:
 
 	static CharacterImageDataPtr _charimg;
 public:
-	int imgtemp[ 28 ];
 	PlayerImageHandles _playerimg;
 	std::vector<int> _nowanim;
 };
@@ -61,8 +60,8 @@ public:
 	void GetMapData( MapDataPtr &temp );
 	void SetMapData( const MapDataPtr &temp );
 	void InitStage();
-	CONST static int MAP_HEIGHT = 16;
-	CONST static int MAP_WIDTH = 500;
+	CONST static int MAP_HEIGHT = 15;
+	CONST static int MAP_WIDTH = 800;
 private:
 	char buf[256];
 	struct StageData {

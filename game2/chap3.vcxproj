@@ -90,24 +90,32 @@
     <ClCompile Include="DrawGraphUpdata.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameLogic.cpp" />
+    <ClCompile Include="GameOverEvent.cpp" />
     <ClCompile Include="GameTime.cpp" />
     <ClCompile Include="GameUpdata.cpp" />
     <ClCompile Include="ImageLoad.cpp" />
     <ClCompile Include="InputUpdata.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MenuController.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Score.cpp" />
+    <ClCompile Include="TitleEvent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DecisionCheck.h" />
     <ClInclude Include="DrawGraphUpdata.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameLogic.h" />
+    <ClInclude Include="GameOverEvent.h" />
     <ClInclude Include="GameTime.h" />
     <ClInclude Include="GameUpdata.h" />
     <ClInclude Include="ImageLoad.h" />
     <ClInclude Include="InputUpdata.h" />
+    <ClInclude Include="MenuController.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Score.h" />
     <ClInclude Include="smart_ptr.h" />
+    <ClInclude Include="TitleEvent.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

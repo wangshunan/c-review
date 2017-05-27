@@ -55,30 +55,34 @@ void CharacterImageData::GetCharacterImageData(CharacterImageDataPtr &temp) {
 void LoadUnityChanImage() {
 	CharacterImageDataPtr _charimgdata;
 	_charimgdata->GetCharacterImageData(_charimgdata);
+	MapImageDataPtr _mapdata;
+	_mapdata->GetMapImageData(_mapdata);
 
-	LoadDivGraph( "media\\UnityChan.png", 28, 7, 4, 64, 64, _charimgdata -> imgtemp );
+	int imgtemp[256];
+	// UnityChanImg
+	LoadDivGraph("media\\UnityChan.png", 28, 7, 4, 64, 64, imgtemp);
 
 	// Run
-	_charimgdata->_playerimg.run[ 0 ] = _charimgdata->imgtemp[ 7 ];
-	_charimgdata->_playerimg.run[ 1 ] = _charimgdata->imgtemp[ 8 ];
-	_charimgdata->_playerimg.run[ 2 ] = _charimgdata->imgtemp[ 9 ];
-	_charimgdata->_playerimg.run[ 3 ] = _charimgdata->imgtemp[ 10 ];
-	_charimgdata->_playerimg.run[ 4 ] = _charimgdata->imgtemp[ 14 ];
-	_charimgdata->_playerimg.run[ 5 ] = _charimgdata->imgtemp[ 15 ];
-	_charimgdata->_playerimg.run[ 6 ] = _charimgdata->imgtemp[ 16 ];
-	_charimgdata->_playerimg.run[ 7 ] = _charimgdata->imgtemp[ 17 ];
+	_charimgdata->_playerimg.run[ 0 ] = imgtemp[ 7 ];
+	_charimgdata->_playerimg.run[ 1 ] = imgtemp[ 8 ];
+	_charimgdata->_playerimg.run[ 2 ] = imgtemp[ 9 ];
+	_charimgdata->_playerimg.run[ 3 ] = imgtemp[ 10 ];
+	_charimgdata->_playerimg.run[ 4 ] = imgtemp[ 14 ];
+	_charimgdata->_playerimg.run[ 5 ] = imgtemp[ 15 ];
+	_charimgdata->_playerimg.run[ 6 ] = imgtemp[ 16 ];
+	_charimgdata->_playerimg.run[ 7 ] = imgtemp[ 17 ];
 
 	// Wait
-	_charimgdata->_playerimg.wait[ 0 ] = _charimgdata->imgtemp[ 0 ];
-	_charimgdata->_playerimg.wait[ 1 ] = _charimgdata->imgtemp[ 1 ];
+	_charimgdata->_playerimg.wait[ 0 ] = imgtemp[ 0 ];
+	_charimgdata->_playerimg.wait[ 1 ] = imgtemp[ 1 ];
 
 	// jump_up
-	_charimgdata->_playerimg.jumpup[0] = _charimgdata->imgtemp[ 21 ];
-	_charimgdata->_playerimg.jumpup[1] = _charimgdata->imgtemp[ 22 ];
+	_charimgdata->_playerimg.jumpup[0] = imgtemp[ 21 ];
+	_charimgdata->_playerimg.jumpup[1] = imgtemp[ 22 ];
 
 	// jump_down
-	_charimgdata->_playerimg.jumpdown[0] = _charimgdata->imgtemp[ 26 ];
-	_charimgdata->_playerimg.jumpdown[1] = _charimgdata->imgtemp[ 27 ];
+	_charimgdata->_playerimg.jumpdown[0] = imgtemp[ 26 ];
+	_charimgdata->_playerimg.jumpdown[1] = imgtemp[ 27 ];
 
 
 	_charimgdata->SetCharacterImageData(_charimgdata);
@@ -87,6 +91,7 @@ void LoadUnityChanImage() {
 void LoadGameImage( ) {
 	MapImageDataPtr _imagedata;
 	_imagedata -> GetMapImageData(_imagedata);
+	int imgtemp[256];
 
 	//font
 	_imagedata->_middlefont = CreateFontToHandle("メイリオ", 42, -1, DX_FONTTYPE_ANTIALIASING);
@@ -99,8 +104,14 @@ void LoadGameImage( ) {
 	// マップイメージ
 	_imagedata -> _imagehandles.block = LoadGraph( "media\\smp2_block.png" );
 	_imagedata -> _imagehandles.bullet = LoadGraph( "media\\smp2_bullet.png" );
-	_imagedata -> _imagehandles.knife = LoadGraph( "media\\smp2_knife.png" );
 	_imagedata -> _imagehandles.title = LoadGraph( "media\\smp2_title.png" );
+
+	// BlockImg
+	LoadDivGraph("media\\map\\Coin1.png", 3, 3, 1, 50, 50, imgtemp);
+
+	_imagedata->_imagehandles.coin[0] = LoadGraph("media\\map\\Coin2.png");
+	_imagedata->_imagehandles.coin[1] = imgtemp[1];
+	_imagedata->_imagehandles.coin[2] = imgtemp[2];
 
 	_imagedata -> SetMapImageData( _imagedata );
 }

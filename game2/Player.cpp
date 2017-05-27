@@ -5,6 +5,7 @@
 #include"GameTime.h"
 #include"ImageLoad.h"
 #include"DecisionCheck.h"
+#include"Score.h"
 
 PlayerUpDataPtr PlayerUpData::_playerdata;
 PlayerData::PlayerData() {
@@ -21,8 +22,8 @@ PlayerUpData::PlayerUpData() {
 	_input->GetInput( _input );
 	_mapdata->GetMapData(_mapdata);
 	_decisioncheck->GetDecisionData(_decisioncheck);
-
-	Init();
+	_score->GetScoreData(_score);
+	_gamelogic->GetGameState(_gamelogic);
 }
 
 PlayerUpData::~PlayerUpData() {
@@ -38,10 +39,12 @@ void PlayerUpData::GetPlayerData( PlayerUpDataPtr &temp ) {
 
 void PlayerUpData::Init() {
 	_posx = -0.33;
-	_posy = 1;
+	_posy = 5;
 	_hp = 3;
 	_animcounter = 0;
-	_fps = 30;
+	_scrollx = 0;
+	_speedy = 0;
+	_frame = 30;
 	_flipx = FALSE;
 }
 
@@ -49,6 +52,7 @@ void PlayerUpData::PlayerController() {
 
 	hx = _posx;
 	hy = _posy;
+
 	// playerコントロール
 	if (_input->_getHoldKey(KEY_INPUT_RIGHT) == 1) {
 		_speedx = 0.1;
@@ -65,23 +69,22 @@ void PlayerUpData::PlayerController() {
 
 	if (_isgrounded) {
 		if (CheckHitKey(KEY_INPUT_SPACE) == 1) {
-			_speedy = 7;
+			_speedy = 6;
 			_isgrounded = FALSE;
 		}
 	}
 
 
 	if (!_isgrounded) {
-		_speedy += GRAVITY / _fps;
+		_speedy += GRAVITY / _frame;
 	}
 
 
-
 	hx += _speedx;
-    hy -= _speedy / _fps;
+    hy -= _speedy / _frame;
 	
 	// スクロール補正
-	if (hx * _imgsizey - _scrollx > 450) {
+	if (hx * _imgsizey - _scrollx > _mapdata->MAP_WIDTH / 2) {
 		_scrollx += (hx - _posx) * _imgsizey;
 	}
 
@@ -109,7 +112,7 @@ void PlayerUpData::AnimationUpdata() {
 		}
 	}
 
-	if ( _gametime->_nowtime % 10 == 0 ) {
+	if ( _gametime->_nowtime % 6 == 0 ) {
 		_animcounter++;
 	}
 
@@ -123,7 +126,7 @@ void PlayerUpData::AnimationUpdata() {
 
 
 void PlayerUpData::AnimChange(int anim[], int size) {
-
+	
 	if (!_nowanim.empty()) {
 		if (_nowanim[0] == anim[0]) {
 			return;
@@ -143,6 +146,7 @@ void PlayerUpData::AnimChange(int anim[], int size) {
 
 void PlayerUpData::CollisionCheck() {
 	DecisionCheck::AtariInfo atari = _decisioncheck->CheckBlock(hx * _imgsizex, hy * _imgsizey, _posx * _imgsizex, _posy * _imgsizey, _imgsizex, _imgsizey);
+	DecisionCheck::AtariInfo coin = _decisioncheck->CheckCoin(_posx * _imgsizex, _posy * _imgsizey, _imgsizex, _imgsizey, _flipx);
 	if (!_decisioncheck->_iscollision) {
 		if (_flipx == FALSE) {
 			if (atari.DR == TRUE || atari.UR == TRUE) {
@@ -155,7 +159,8 @@ void PlayerUpData::CollisionCheck() {
 			}
 		}
 	}
-	else if ( _decisioncheck->_iscollision ){
+	
+	if ( _decisioncheck->_iscollision ){
 		_speedy = 0;
 		hy = _posy;
 	}
@@ -169,8 +174,16 @@ void PlayerUpData::CollisionCheck() {
 		_isgrounded = FALSE;
 	}
 
+	if ( coin.COIN == TRUE) {
+		_score->_score++;
+	}
+
 	_posx = hx;
 	_posy = hy;
+
+	if (_posy * _imgsizey / _mapdata->CHIP_SIZE >= _mapdata->MAP_HEIGHT) {
+		_gamelogic->_gamestate = _gamelogic->GameOver;
+	}
 }
 
 void PlayerUpData::UpData() {
