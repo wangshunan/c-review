@@ -1,0 +1,5 @@
+﻿  TextProcessing.cpp
+d:\用户目录\我的文档\c-review\テキスト処理\text2\text\textprocessing.cpp(84): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(136): note: 'strcpy' の宣言を確認してください
+  Text.vcxproj -> D:\用户目录\我的文档\c-review\テキスト処理\Text2\x64\Debug\Text.exe
+  Text.vcxproj -> D:\用户目录\我的文档\c-review\テキスト処理\Text2\x64\Debug\Text.pdb (Partial PDB)
